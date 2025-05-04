@@ -6,12 +6,12 @@ const mountains = {
     },
     cloudPeak: {
         name: "雲峰",
-        altitude: "海 Popularity: 2,800 meters",
+        altitude: "海拔 2800 公尺",
         description: "雲峰以其雲霧繚繞的山頂而聞名，景色壯麗。中等難度的步道需要一定體力，建議攜帶保暖衣物，因山頂氣溫較低。注意檢查天氣預報，避免雨天登山。"
     },
     starRidge: {
         name: "星脊",
-        altitude: "海拔 3,500 公尺",
+        altitude: "海拔 3500 公尺",
         description: "星脊是高海拔挑戰，山頂可俯瞰星空，極具視覺震撼。攀登需專業裝備（如登山杖和繩索），並建議結伴而行。務必攜帶高熱量食物以補充體力。"
     }
 };
