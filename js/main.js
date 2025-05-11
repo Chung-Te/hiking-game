@@ -1,4 +1,4 @@
-// 啟動遊戲
+// 啟動遊戲 
 window.onload = function() {
   showStartScene();
 };
@@ -34,13 +34,13 @@ function showMountainSelection() {
           <div class="category">
             <div class="category-title" onclick="toggleCategory('cat2')">海拔2000~3000公尺 [+]</div>
             <div class="subcategory" id="cat2" style="display:none;">
-              <div onclick="showMountainInfo('加里山', '山林簡介：加里山位於台灣苗栗縣南庄鄉，標高2220公尺，登山步道聯結南庄蓬萊、風美及鹿場，沿途森林樣貌為柳杉人工造林及闊葉林。沿途可見伐木時期的台車鐵軌，能見證當年興盛的林業，後半段的路有拉繩、攀登地形。小百岳加里山為中北台名山，山頂一等三角點，視野遼闊，可遠眺氣勢磅礡的雪山聖稜線和鄰近的鹿場大山。盛產台灣特有一葉蘭，每年3、4月總吸引許多登山客尋芳賞花。')">加里山</div>
+              <div onclick="showMountainInfo('加里山', '山林簡介：加里山位於台灣苗栗縣南庄鄉，標高2220公尺，登山步道聯結南庄蓬萊、風美及鹿場，沿途森林樣貌為柳杉人工造林及闊葉林。')">加里山</div>
             </div>
           </div>
           <div class="category">
             <div class="category-title" onclick="toggleCategory('cat3')">海拔3000以上 [+]</div>
             <div class="subcategory" id="cat3" style="display:none;">
-              <div onclick="showMountainInfo('玉山主峰', '山林簡介：玉山主峰位於台灣的中心位置，海拔3952公尺，為台灣群山之首，百岳排名第一，也是東北亞的最高峰。主峰四周有東、南、西、北峰環繞，外圍還有前峰、小南山、南玉山、東小南山、鹿山與北北峰遙相呼應，宛如眾星拱月般，襯托出主峰的王者之尊，壯偉雄奇的山容、絕佳的展望和絢麗的日出景觀')">玉山</div>
+              <div onclick="showMountainInfo('玉山主峰', '山林簡介：玉山主峰位於台灣的中心位置，海拔3952公尺，為台灣群山之首，百岳排名第一，東北亞的最高峰。')">玉山</div>
             </div>
           </div>
         </div>
@@ -67,61 +67,111 @@ function showMountainInfo(name, description) {
   `;
 }
 
-// 確認後進入行前訓練
+// 確認後直接進入裝備選擇頁面
 function confirmMountain() {
-  setBackground('bg_training.jpg');  // 行前訓練背景圖
-
-  document.getElementById('game').innerHTML = `
-    <div class="training-scene">
-      <h1>行前訓練</h1>
-      <p>（這裡之後可以設計行前準備的內容）</p>
-    </div>
-  `;
+  showEquipmentSelection();
 }
 
+let selectedEquipment = [];  // 存已選裝備
+
 function showEquipmentSelection() {
-  setBackground('images/mountain2.jpg');  // 你可以換一張背景圖 or 暫時用舊的
+  selectedEquipment = []; // 每次進入重設
+
+  setBackground('images/mountain2.jpg');
 
   document.getElementById('game').innerHTML = `
-    <div class="scene-box">
-      <h2>登山裝備選擇</h2>
-      <div class="selection-container">
-        <div class="selection-list">
-          <ul>
-            <li onclick="showEquipmentDetail('登山鞋')">登山鞋</li>
-            <li onclick="showEquipmentDetail('雨衣')">雨衣</li>
-            <li onclick="showEquipmentDetail('頭燈')">頭燈</li>
-          </ul>
+    <div class="mountain-scene-container" style="width: 1000px;">
+      <div class="mountain-scene" style="width: 1000px; height: 400px;">
+        <div class="left-panel">
+          <h3>裝備清單</h3>
+          <div class="subcategory" style="display:block;">
+            <div onclick="showEquipmentDetail('登山鞋')">登山鞋</div>
+            <div onclick="showEquipmentDetail('雨衣')">雨衣</div>
+            <div onclick="showEquipmentDetail('頭燈')">頭燈</div>
+            <div onclick="showEquipmentDetail('瓦斯爐')">瓦斯爐</div>
+            <div onclick="showEquipmentDetail('乾糧與食物')">乾糧與食物</div>
+          </div>
         </div>
-        <div class="selection-detail" id="equipment-detail">
-          請選擇左邊的裝備查看說明
+
+        <div class="right-panel" id="equipment-info">
+          <p>請選擇左邊的裝備！</p>
+        </div>
+
+        <div class="selected-panel" id="selected-equipment-panel">
+          <h4>已選擇</h4>
+          <ul id="selected-list"></ul>
         </div>
       </div>
-      <button onclick="proceedToNextStep()">確認</button>
+
+      <div style="width:100%; text-align:right; margin-top:10px;">
+        <button onclick="confirmEquipmentSelection()">確認</button>
+      </div>
     </div>
   `;
 }
 
 function showEquipmentDetail(item) {
   let detailText = '';
+  let imageSrc = '';
 
   if (item === '登山鞋') {
     detailText = '登山鞋提供良好抓地力與防滑性，適合崎嶇地形。';
+    imageSrc = 'images/gear/mountain_shoes.jpg';
   } else if (item === '雨衣') {
     detailText = '雨衣防風防水，避免突如其來的降雨讓身體失溫。';
+    imageSrc = 'images/gear/raincoat.jpg';
   } else if (item === '頭燈') {
     detailText = '頭燈方便夜間照明，雙手仍可自由行動，安全性提升。';
+    imageSrc = 'images/gear/headlamp.jpg';
+  } else if (item === '瓦斯爐') {
+    detailText = '瓦斯爐可用來烹煮食物，增加登山過程中的能量補充。';
+    imageSrc = 'images/gear/gas_stove.jpg';
+  } else if (item === '乾糧與食物') {
+    detailText = '乾糧與食物是登山必備，能提供登山所需的能量。';
+    imageSrc = 'images/gear/dry_food.jpg';
   }
 
-  document.getElementById('equipment-detail').innerHTML = `
+  document.getElementById('equipment-info').innerHTML = `
     <h3>${item}</h3>
+    <img src="${imageSrc}" alt="${item}" style="width:200px; height:auto;">
     <p>${detailText}</p>
+    <button onclick="addEquipment('${item}')">加入</button>
   `;
 }
 
-function proceedToNextStep() {
-  alert('登山裝備選擇完成，進入下一步...');
-  // 之後可以改呼叫下一個畫面函式
+function addEquipment(item) {
+  if (!selectedEquipment.includes(item)) {
+    selectedEquipment.push(item);
+    updateSelectedList();
+  } else {
+    alert(item + ' 已經加入過了！');
+  }
 }
+
+function removeEquipment(item) {
+  selectedEquipment = selectedEquipment.filter(eq => eq !== item);
+  updateSelectedList();
+}
+
+function updateSelectedList() {
+  const listEl = document.getElementById('selected-list');
+  listEl.innerHTML = '';
+  selectedEquipment.forEach(eq => {
+    listEl.innerHTML += `<li onclick="removeEquipment('${eq}')" title="點擊移除">${eq} ❌</li>`;
+  });
+}
+
+function confirmEquipmentSelection() {
+  if (selectedEquipment.length === 0) {
+    alert('請至少選擇一項裝備！');
+    return;
+  }
+
+  alert('裝備選擇完成，進入下一步...');
+  // 呼叫下一個畫面函式
+  // nextPageFunction();
+}
+
+
 
 
