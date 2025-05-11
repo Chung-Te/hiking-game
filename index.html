@@ -1,51 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登山安全知識遊戲</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>登山安全知識遊戲</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div id="game-container">
-        <!-- 首頁 -->
-        <div id="home-screen" class="screen active">
-            <h1>登山安全知識遊戲</h1>
-            <button onclick="startGame()">開始遊戲</button>
-        </div>
-        <!-- 山林選擇頁面 -->
-        <div id="selection-screen" class="screen">
-            <div class="content">
-                <!-- 左半邊：選項區 -->
-                <div class="options">
-                    <h2>選擇你的登山目標</h2>
-                    <div class="category">
-                        <h3 onclick="toggleCategory('altitude-2000')">海拔2000以下</h3>
-                        <ul id="altitude-2000" class="sub-options hidden">
-                            <li onclick="selectMountain('pineHill')">松林丘</li>
-                        </ul>
-                    </div>
-                    <div class="category">
-                        <h3 onclick="toggleCategory('altitude-3000')">海拔3000以下</h3>
-                        <ul id="altitude-3000" class="sub-options hidden">
-                            <li onclick="selectMountain('cloudPeak')">雲峰</li>
-                        </ul>
-                    </div>
-                    <div class="category">
-                        <h3 onclick="toggleCategory('altitude-3000-plus')">海拔3000以上</h3>
-                        <ul id="altitude-3000-plus" class="sub-options hidden">
-                            <li onclick="selectMountain('starRidge')">星脊</li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- 右半邊：山岳資訊 -->
-                <div class="info">
-                    <h2 id="mountain-name">請選擇一座山</h2>
-                    <p id="mountain-description">點擊左側的山名以查看特色與相關事項。</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script src="js/game.js"></script>
+  <div id="game"></div>
+
+  <script src="js/main.js"></script>
+
 </body>
 </html>

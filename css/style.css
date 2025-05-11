@@ -1,129 +1,80 @@
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-}
-
-#game-container {
-    min-height: 100vh;
-    background-image: url('../assets/images/mountain1.jpg'); /* 需添加背景圖 */
+    margin: 0;
+    padding: 0;
     background-size: cover;
     background-position: center;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-}
-
-/* 頁面切換 */
-.screen {
-    display: none;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s ease-in-out; /* 背景平滑切換 */
+  }
+  
+  #game {
     width: 100%;
-    max-width: 1200px;
-}
-.screen.active {
-    display: block;
-}
-
-/* 首頁樣式 */
-#home-screen {
+    height: 100vh; /* 全螢幕 */
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+  }
+  
+  .start-scene, .training-scene {
     text-align: center;
-}
-#home-screen h1 {
-    font-size: 3em;
-    margin-bottom: 30px;
-}
-#home-screen button {
-    padding: 15px 30px;
-    font-size: 1.2em;
-    cursor: pointer;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-#home-screen button:hover {
-    background-color: #45a049;
-}
+  }
 
-/* 山林選擇頁面 */
-.content {
-    display: flex;
-    gap: 20px;
-    min-height: calc(100vh - 100px);
-}
-.options, .info {
-    flex: 1;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 20px;
+  .scene-box {
+    background-color: rgba(255, 255, 255, 0.9); /* 白底＋微透明 */
+    padding: 40px;
     border-radius: 10px;
-    overflow-y: auto;
-}
-.options h2 {
-    font-size: 2em;
-    margin-bottom: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
     text-align: center;
-}
-.options h3 {
-    font-size: 1.5em;
+    max-width: 500px;
+  }
+  .start-scene h1 {
+    margin-bottom: 20px;
+  }
+  .start-scene button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .mountain-scene-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .mountain-scene {
+    display: flex;
+    width: 800px;
+    height: 400px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+  
+  .left-panel {
+    width: 40%;
+    background-color: #8B4513; /* 咖啡色 */
+    color: white;
+    padding: 20px;
+  }
+  
+  .right-panel {
+    width: 60%;
+    background-color: #f5f5f5;
+    padding: 20px;
+  }
+  
+  .category-title {
+    cursor: pointer;
+    font-weight: bold;
     margin: 10px 0;
+  }
+  
+  .subcategory {
+    margin-left: 20px;
+  }
+  
+  .subcategory div {
     cursor: pointer;
-    padding: 10px;
-    background-color: #333;
-    border-radius: 5px;
-}
-.options h3:hover {
-    background-color: #444;
-}
-.sub-options {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-.sub-options li {
-    padding: 10px;
-    font-size: 1.1em;
-    cursor: pointer;
-    border-bottom: 1px solid #555;
-}
-.sub-options li:hover {
-    background-color: #555;
-}
-.sub-options.hidden {
-    display: none;
-}
-.info h2 {
-    font-size: 1.8em;
-    margin-bottom: 15px;
-}
-.info p {
-    font-size: 1.1em;
-    line-height: 1.5;
-}
-
-/* 響應式設計 */
-@media (max-width: 800px) {
-    .content {
-        flex-direction: column;
-        min-height: auto;
-    }
-    .options, .info {
-        flex: none;
-        width: 100%;
-    }
-    #home-screen h1 {
-        font-size: 2em;
-    }
-    .options h2 {
-        font-size: 1.8em;
-    }
-}
+    margin: 5px 0;
+  }
+  
